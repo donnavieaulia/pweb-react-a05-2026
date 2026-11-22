@@ -1,0 +1,218 @@
+{
+  "jobs": [
+    {
+      "id": 1001,
+      "title": "Frontend Engineering Intern (React & TypeScript)",
+      "company_name": "Nusantara Cloud Tech",
+      "category": "Software Development",
+      "candidate_required_location": "Surabaya (Hybrid)",
+      "salary": "Rp 4.500.000",
+      "tags": [
+        "React",
+        "TypeScript",
+        "CSS",
+        "Git",
+        "REST API"
+      ]
+    },
+    {
+      "id": 1002,
+      "title": "Full-Stack Web Developer Intern",
+      "company_name": "Garuda FinTech",
+      "category": "Software Development",
+      "candidate_required_location": "Jakarta (Remote)",
+      "salary": "Rp 5.500.000",
+      "tags": [
+        "React",
+        "TypeScript",
+        "PostgreSQL",
+        "Express",
+        "Prisma"
+      ]
+    },
+    {
+      "id": 1003,
+      "title": "Software Engineer Intern — Web Platform",
+      "company_name": "Bintang Commerce",
+      "category": "Software Development",
+      "candidate_required_location": "Indonesia (Remote)",
+      "salary": "Rp 6.000.000",
+      "tags": [
+        "React",
+        "TypeScript",
+        "CSS",
+        "Git",
+        "Testing"
+      ]
+    },
+    {
+      "id": 1004,
+      "title": "DevOps & Cloud Infrastructure Intern",
+      "company_name": "AwanMerdeka Cloud",
+      "category": "Software Development",
+      "candidate_required_location": "Jakarta (Remote)",
+      "salary": "Rp 5.200.000",
+      "tags": [
+        "Git",
+        "PostgreSQL",
+        "Linux",
+        "Docker",
+        "CI/CD"
+      ]
+    },
+    {
+      "id": 1005,
+      "title": "Backend Developer Intern",
+      "company_name": "Saka Logistik",
+      "category": "Software Development",
+      "candidate_required_location": "Bandung (Onsite)",
+      "salary": "Rp 4.000.000",
+      "tags": [
+        "Node.js",
+        "Express",
+        "PostgreSQL",
+        "REST API"
+      ]
+    },
+    {
+      "id": 1006,
+      "title": "Mobile Developer Intern (Flutter)",
+      "company_name": "Pelita Health",
+      "category": "Software Development",
+      "candidate_required_location": "Yogyakarta (Hybrid)",
+      "salary": "Rp 3.800.000",
+      "tags": [
+        "Flutter",
+        "Dart",
+        "Firebase",
+        "Git"
+      ]
+    },
+    {
+      "id": 1007,
+      "title": "UI Engineer Intern",
+      "company_name": "Kirana Design Studio",
+      "category": "Software Development",
+      "candidate_required_location": "Jakarta (Hybrid)",
+      "salary": "Rp 4.200.000",
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Figma"
+      ]
+    },
+    {
+      "id": 1008,
+      "title": "Data Engineer Intern",
+      "company_name": "Arunika Analytics",
+      "category": "Software Development",
+      "candidate_required_location": "Surabaya (Onsite)",
+      "salary": "Rp 4.800.000",
+      "tags": [
+        "Python",
+        "SQL",
+        "Airflow",
+        "Docker"
+      ]
+    },
+    {
+      "id": 1009,
+      "title": "QA Automation Intern",
+      "company_name": "Samudra Payments",
+      "category": "Software Development",
+      "candidate_required_location": "Jakarta (Remote)",
+      "salary": "Rp 4.300.000",
+      "tags": [
+        "JavaScript",
+        "Testing",
+        "Cypress",
+        "Git"
+      ]
+    },
+    {
+      "id": 1010,
+      "title": "Machine Learning Intern",
+      "company_name": "Cendekia AI",
+      "category": "Software Development",
+      "candidate_required_location": "Bandung (Hybrid)",
+      "salary": "Rp 5.000.000",
+      "tags": [
+        "Python",
+        "TensorFlow",
+        "SQL",
+        "Git"
+      ]
+    },
+    {
+      "id": 1011,
+      "title": "Cloud Engineer Intern",
+      "company_name": "Rajawali Cloud",
+      "category": "Software Development",
+      "candidate_required_location": "Jakarta (Onsite)",
+      "salary": "Rp 5.300.000",
+      "tags": [
+        "Linux",
+        "AWS",
+        "Docker",
+        "Kubernetes"
+      ]
+    },
+    {
+      "id": 1012,
+      "title": "Frontend Developer Intern (Vue)",
+      "company_name": "Lentera Edu",
+      "category": "Software Development",
+      "candidate_required_location": "Malang (Remote)",
+      "salary": "Rp 3.500.000",
+      "tags": [
+        "Vue",
+        "JavaScript",
+        "CSS",
+        "Git"
+      ]
+    },
+    {
+      "id": 1013,
+      "title": "Full-Stack Intern (Laravel)",
+      "company_name": "Merapi Digital",
+      "category": "Software Development",
+      "candidate_required_location": "Semarang (Onsite)",
+      "salary": "Rp 3.700.000",
+      "tags": [
+        "PHP",
+        "Laravel",
+        "MySQL",
+        "JavaScript"
+      ]
+    },
+    {
+      "id": 1014,
+      "title": "Security Engineer Intern",
+      "company_name": "Benteng Siber",
+      "category": "Software Development",
+      "candidate_required_location": "Jakarta (Hybrid)",
+      "salary": "Rp 5.600.000",
+      "tags": [
+        "Linux",
+        "Networking",
+        "Python",
+        "Docker"
+      ]
+    },
+    {
+      "id": 1015,
+      "title": "React Native Intern",
+      "company_name": "Kopi Kita App",
+      "category": "Software Development",
+      "candidate_required_location": "Surabaya (Hybrid)",
+      "salary": "Rp 4.100.000",
+      "tags": [
+        "React",
+        "TypeScript",
+        "React Native",
+        "REST API"
+      ]
+    }
+  ]
+}
