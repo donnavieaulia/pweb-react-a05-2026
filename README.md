@@ -52,9 +52,9 @@ Setiap file punya header `PJ: <nama>` dan komentar `TODO`. Komponen yang belum d
 
 ## Panduan Style (wajib dipakai semua anggota)
 
-Tema mengikuti proyek Modul 3 kami: pasir `--pasir`, hijau zaitun `--hijau`, hijau tua `--hijau-tua`, sage `--sage`, font Inter. Semua ada di `src/index.css`.
+Tema mengikuti proyek TerraGoods kami (pweb-js-a05-2026): bone `--pasir`, hijau zaitun `--hijau`, hijau tua `--hijau-tua`, sage `--sage`, font Inter. Kartu putih ber-border tipis, tombol hijau rounded. Semua ada di `src/index.css`.
 
-- Kotak/card: `.kotak` + `.kotak__header` + `.kotak__body`
+- Kotak/card: `.kotak` + `.kotak__header` (atau `.kotak__header--hijau` untuk judul blok hijau) + `.kotak__body`
 - Tombol: `.btn`, `.btn--primary`, `.btn--danger`
 - Input: `.input`, `.select`, error pakai `.input--error` + `.error-text`
 - Badge: `.badge--ok` (hijau), `.badge--warn` (kuning), `.badge--bad` (merah)
