@@ -20,8 +20,8 @@ function Navbar({ activeTab, onChangeTab, onOpenForm }: NavbarProps) {
   return (
     <header className="navbar">
       <div className="navbar__brand">
-        <span className="navbar__logo">AM</span>
-        <span>Aku Mw Magang</span>
+        Aku Mw Magang
+        <small>Catatan lamaran magang Kapten</small>
       </div>
       <nav className="navbar__tabs">
         {TABS.map((tab) => (

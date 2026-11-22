@@ -50,6 +50,16 @@ src/
 
 Setiap file punya header `PJ: <nama>` dan komentar `TODO`. Komponen yang belum dikerjakan masih tampil sebagai kotak placeholder.
 
+## Panduan Style (wajib dipakai semua anggota)
+
+Tema mengikuti proyek Modul 3 kami: pasir `--pasir`, hijau zaitun `--hijau`, hijau tua `--hijau-tua`, sage `--sage`, font Inter. Semua ada di `src/index.css`.
+
+- Kotak/card: `.kotak` + `.kotak__header` + `.kotak__body`
+- Tombol: `.btn`, `.btn--primary`, `.btn--danger`
+- Input: `.input`, `.select`, error pakai `.input--error` + `.error-text`
+- Badge: `.badge--ok` (hijau), `.badge--warn` (kuning), `.badge--bad` (merah)
+- Jangan hardcode warna baru, pakai variabel `var(--...)`. Butuh class umum baru? Kabari Dona.
+
 ## Aturan Kerja Kelompok
 
 1. Selalu `git pull` sebelum mulai ngoding.

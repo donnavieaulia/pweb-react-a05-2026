@@ -1,111 +1,252 @@
+/* =====================================================================
+   Style global — PJ: Dona
+   Tema mengikuti proyek Modul 3 (pweb-ts-a05-2026):
+   pasir #DDD8CA, hijau zaitun #3B4427, hijau tua #1B2E1E, sage #C8D6AF, font Inter.
+   Ganti warna cukup lewat variabel di bawah. Semua anggota pakai variabel ini.
+   ===================================================================== */
+:root {
+  --pasir: #ddd8ca;
+  --hijau: #3b4427;
+  --hijau-tua: #1b2e1e;
+  --sage: #c8d6af;
+  --putih: #fff;
+  --garis: #e0dad0;
+  --garis2: #c9c5b8;
+  --abu: #6d6e5f;
+  --bahaya: #8a2d1b;
+  --bahaya-bg: #f5dcd5;
+
+  /* Warna badge Match % / status (versi kalem, tetap hijau-kuning-merah) */
+  --ok: #3b4427;
+  --ok-bg: #c8d6af;
+  --warn: #7a5a12;
+  --warn-bg: #efe0b9;
+  --bad: #8a2d1b;
+  --bad-bg: #f5dcd5;
+
+  --sans: "Inter", sans-serif;
+  --radius: 8px;
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-:root {
-  --navy: #0f3a6b;
-  --blue: #1a73e8;
-  --bg: #f5f7fa;
-  --card: #ffffff;
-  --border: #e2e8f0;
-  --text: #1a202c;
-  --muted: #64748b;
-  --green: #16a34a;
-  --yellow: #d97706;
-  --red: #dc2626;
-}
-
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  min-height: 100vh;
+  font: 16px/1.5 var(--sans);
+  color: var(--hijau);
+  background: var(--pasir);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
 }
 
 /* ---------- Navbar ---------- */
 .navbar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 14px 32px;
-  background: var(--navy);
-  color: #fff;
+  gap: 12px 24px;
+  padding: 16px 24px;
+  background: var(--hijau);
+  color: var(--putih);
+  border-bottom: 1px solid #000;
 }
 .navbar__brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  font-size: 1.4rem;
   font-weight: 700;
-  font-size: 1.15rem;
+  line-height: 1.2;
 }
-.navbar__logo {
-  background: var(--blue);
-  border-radius: 6px;
-  padding: 4px 6px;
-  font-size: 0.85rem;
+.navbar__brand small {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #bdbdbd;
 }
 .navbar__tabs {
   display: flex;
-  gap: 6px;
+  flex-wrap: wrap;
+  gap: 24px;
 }
 .tab {
+  padding: 4px 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
   background: transparent;
-  border: none;
-  color: #cbd5e1;
-  padding: 8px 14px;
-  border-radius: 6px;
+  color: var(--putih);
   cursor: pointer;
-  font-size: 0.95rem;
+}
+.tab:hover {
+  color: var(--sage);
 }
 .tab--active {
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
+  color: var(--sage);
+  border-bottom-color: var(--sage);
+  font-weight: 600;
 }
 
-/* ---------- Umum ---------- */
+/* ---------- Tombol ---------- */
+.btn {
+  min-height: 34px;
+  padding: 6px 14px;
+  border: 1px solid var(--hijau);
+  border-radius: 4px;
+  background: var(--putih);
+  color: var(--hijau);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn:hover {
+  background: var(--sage);
+}
+.btn--primary {
+  background: var(--hijau);
+  color: var(--putih);
+}
+.btn--primary:hover {
+  background: var(--hijau-tua);
+}
+.navbar .btn--primary {
+  border-color: var(--sage);
+  background: var(--sage);
+  color: var(--hijau-tua);
+}
+.navbar .btn--primary:hover {
+  background: var(--putih);
+}
+.btn--danger {
+  border-color: var(--bahaya);
+  color: var(--bahaya);
+}
+.btn--danger:hover {
+  background: var(--bahaya-bg);
+}
+.btn:disabled {
+  border-color: var(--garis2);
+  background: var(--garis);
+  color: var(--abu);
+  cursor: not-allowed;
+}
+.btn:focus-visible,
+.tab:focus-visible {
+  outline: 3px solid var(--sage);
+  outline-offset: 2px;
+}
+
+/* ---------- Input ---------- */
+.input,
+.select {
+  min-height: 34px;
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--garis2);
+  border-radius: 4px;
+  background: var(--putih);
+  color: var(--hijau);
+}
+.input:focus,
+.select:focus {
+  outline: 2px solid var(--sage);
+  border-color: var(--hijau);
+}
+.input--error {
+  border-color: var(--bahaya);
+  background: var(--bahaya-bg);
+}
+.error-text {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: var(--bahaya);
+}
+
+/* ---------- Kotak (card) ala Modul 3 ---------- */
+.kotak {
+  overflow: hidden;
+  border: 1px solid #000;
+  border-radius: var(--radius);
+  background: var(--putih);
+}
+.kotak__header {
+  padding: 14px 18px;
+  background: var(--hijau-tua);
+  color: var(--sage);
+}
+.kotak__body {
+  padding: 16px 18px;
+}
+
+/* ---------- Badge ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.badge--ok {
+  background: var(--ok-bg);
+  color: var(--ok);
+}
+.badge--warn {
+  background: var(--warn-bg);
+  color: var(--warn);
+}
+.badge--bad {
+  background: var(--bad-bg);
+  color: var(--bad);
+}
+
+/* ---------- Layout ---------- */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 24px 32px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-.btn {
-  border: 1px solid var(--border);
-  background: #fff;
-  border-radius: 6px;
-  padding: 8px 14px;
-  cursor: pointer;
-}
-.btn--primary {
-  background: var(--blue);
-  border-color: var(--blue);
-  color: #fff;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
 }
 .explore-layout {
   display: grid;
-  grid-template-columns: 320px 1fr;
+  grid-template-columns: 320px minmax(0, 1fr);
   gap: 16px;
+  align-items: start;
 }
 @media (max-width: 800px) {
   .explore-layout {
     grid-template-columns: 1fr;
   }
+  .navbar {
+    padding: 12px 16px;
+  }
+  .container {
+    padding: 16px;
+  }
 }
 
 /* Placeholder komponen yang belum dikerjakan (hapus kalau sudah jadi) */
 .placeholder {
-  background: var(--card);
-  border: 1px dashed var(--border);
-  border-radius: 10px;
   padding: 14px 18px;
-  color: var(--muted);
+  border: 1px dashed var(--garis2);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--abu);
 }
 .placeholder strong {
-  color: var(--text);
+  color: var(--hijau);
 }
