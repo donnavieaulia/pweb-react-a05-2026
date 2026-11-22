@@ -8,15 +8,23 @@ interface NavbarProps {
   activeTab: TabKey;
   onChangeTab: (tab: TabKey) => void;
   onOpenForm: () => void;
+  pipelineCount: number;
+  offerCount: number;
 }
 
-const TABS: { key: TabKey; label: string }[] = [
-  { key: "explore", label: "Eksplorasi Lowongan" },
-  { key: "pipeline", label: "Pipeline Lamaran" },
-  { key: "offer", label: "Bandingkan Offer" },
-];
+function Navbar({
+  activeTab,
+  onChangeTab,
+  onOpenForm,
+  pipelineCount,
+  offerCount,
+}: NavbarProps) {
+  const tabs: { key: TabKey; label: string; count?: number }[] = [
+    { key: "explore", label: "Eksplorasi Lowongan" },
+    { key: "pipeline", label: "Pipeline Lamaran", count: pipelineCount },
+    { key: "offer", label: "Bandingkan Offer", count: offerCount },
+  ];
 
-function Navbar({ activeTab, onChangeTab, onOpenForm }: NavbarProps) {
   return (
     <header className="navbar">
       <div className="navbar__brand">
@@ -24,7 +32,7 @@ function Navbar({ activeTab, onChangeTab, onOpenForm }: NavbarProps) {
         <small>Catatan lamaran magang Kapten</small>
       </div>
       <nav className="navbar__tabs">
-        {TABS.map((tab) => (
+        {tabs.map((tab) => (
           <button
             key={tab.key}
             type="button"
@@ -32,6 +40,9 @@ function Navbar({ activeTab, onChangeTab, onOpenForm }: NavbarProps) {
             onClick={() => onChangeTab(tab.key)}
           >
             {tab.label}
+            {tab.count !== undefined && (
+              <span className="navbar__count">({tab.count})</span>
+            )}
           </button>
         ))}
       </nav>

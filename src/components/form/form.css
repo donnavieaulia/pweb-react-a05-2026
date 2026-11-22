@@ -1,0 +1,52 @@
+.form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.form-close {
+  border: 0;
+  background: transparent;
+  color: var(--putih);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.form-close:hover {
+  color: var(--sage);
+}
+.app-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 16px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.field label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.field--full {
+  grid-column: 1 / -1;
+}
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 6px;
+}
+.success-text {
+  margin: 0 auto 0 0;
+  color: var(--sukses);
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+  .app-form {
+    grid-template-columns: 1fr;
+  }
+}
