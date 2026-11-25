@@ -24,6 +24,7 @@ import StatsCards from "./components/dashboard/StatsCards";
 import OfferComparator from "./components/dashboard/OfferComparator";
 
 const DEFAULT_SKILLS = ["React", "TypeScript", "CSS"];
+const FIFTEEN_DAYS_MS = 15 * 24 * 60 * 60 * 1000;
 
 function App() {
   // ---------- State utama (persisten di localStorage) ----------
@@ -40,6 +41,10 @@ function App() {
   const [activeTab, setActiveTab] = useState<TabKey>("explore");
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [jobSource, setJobSource] = useState<JobSource>("remote");
+  const [pendingDelete, setPendingDelete] = useState<{
+    app: Application;
+    index: number;
+  } | null>(null);
 
   // ---------- Derived state ----------
   const offerCount = applications.filter(
@@ -73,6 +78,54 @@ function App() {
     handleAddApplication(newApp);
   }
 
+  // ---------- Handler Fitur 3 & 6 (Sean) ----------
+  function handleSimulateGhosting(id: string) {
+    setApplications((prev) =>
+      prev.map((app) => {
+        if (app.id !== id) return app;
+        const baseMs = Date.parse(app.lastUpdatedAt);
+        const shiftedIso = new Date(
+          (Number.isNaN(baseMs) ? Date.now() : baseMs) - FIFTEEN_DAYS_MS,
+        ).toISOString();
+
+        return {
+          ...app,
+          lastUpdatedAt: shiftedIso,
+          activityLogs: [
+            {
+              id: crypto.randomUUID(),
+              timestamp: new Date().toISOString(),
+              message: "Simulasi +15 hari dijalankan",
+            },
+            ...app.activityLogs,
+          ],
+        };
+      }),
+    );
+  }
+
+  function handleDeleteApplication(id: string) {
+    const index = applications.findIndex((app) => app.id === id);
+    if (index === -1) return;
+
+    const target = applications[index];
+    setApplications((prev) => prev.filter((app) => app.id !== id));
+    setPendingDelete({ app: target, index });
+  }
+
+  function handleUndoDelete() {
+    if (!pendingDelete) return;
+    const { app, index } = pendingDelete;
+
+    setApplications((prev) => {
+      const next = [...prev];
+      const insertAt = Math.min(index, next.length);
+      next.splice(insertAt, 0, app);
+      return next;
+    });
+    setPendingDelete(null);
+  }
+
   return (
     <>
       <Navbar
@@ -84,7 +137,7 @@ function App() {
       />
 
       <main className="container">
-        <ConflictBanner />
+        <ConflictBanner applications={applications} />
         <StatsCards />
 
         {isFormOpen && (
@@ -116,7 +169,12 @@ function App() {
 
         {activeTab === "pipeline" && (
           <>
-            <WarRoom />
+            <WarRoom
+              applications={applications}
+              kaptenSkills={kaptenSkills}
+              onSimulateGhosting={handleSimulateGhosting}
+              onDelete={handleDeleteApplication}
+            />
             <ApplicationDetail />
             <InterviewTimer />
           </>
@@ -125,7 +183,14 @@ function App() {
         {activeTab === "offer" && <OfferComparator />}
       </main>
 
-      <UndoToast />
+      {pendingDelete && (
+        <UndoToast
+          key={pendingDelete.app.id}
+          deletedApp={pendingDelete.app}
+          onUndo={handleUndoDelete}
+          onExpire={() => setPendingDelete(null)}
+        />
+      )}
     </>
   );
 }

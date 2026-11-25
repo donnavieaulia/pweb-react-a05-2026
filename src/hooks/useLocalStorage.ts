@@ -3,14 +3,34 @@
 // Custom Hook wajib (generic). Dipakai untuk `applications` & `kaptenSkills`.
 // Pemakaian: const [apps, setApps] = useLocalStorage<Application[]>("applications", []);
 // =====================================================================
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 
+function readFromStorage<T>(key: string, initialValue: T): T {
+  try {
+    const raw = window.localStorage.getItem(key);
+    if (raw === null) return initialValue;
+    return JSON.parse(raw) as T;
+  } catch {
+    return initialValue;
+  }
+}
+
 export function useLocalStorage<T>(
-  _key: string,
+  key: string,
   initialValue: T,
 ): [T, Dispatch<SetStateAction<T>>] {
-  // TODO (Sean): baca dari localStorage saat init + simpan tiap value berubah.
-  // Sementara masih pakai useState biasa supaya app tetap jalan.
-  return useState<T>(initialValue);
+  const [value, setValue] = useState<T>(() =>
+    readFromStorage(key, initialValue),
+  );
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } catch {
+      // Abaikan jika localStorage penuh atau diblokir oleh browser.
+    }
+  }, [key, value]);
+
+  return [value, setValue];
 }
