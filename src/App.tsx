@@ -19,7 +19,6 @@ import ConflictBanner from "./components/pipeline/ConflictBanner";
 import WarRoom from "./components/pipeline/WarRoom";
 import UndoToast from "./components/pipeline/UndoToast";
 import ApplicationDetail from "./components/detail/ApplicationDetail";
-import InterviewTimer from "./components/detail/InterviewTimer";
 import StatsCards from "./components/dashboard/StatsCards";
 import OfferComparator from "./components/dashboard/OfferComparator";
 
@@ -39,6 +38,8 @@ function App() {
 
   // ---------- State tampilan ----------
   const [activeTab, setActiveTab] = useState<TabKey>("explore");
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const selectedApplication = applications.find((app) => app.id === selectedId);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [jobSource, setJobSource] = useState<JobSource>("remote");
   const [pendingDelete, setPendingDelete] = useState<{
@@ -50,6 +51,15 @@ function App() {
   const offerCount = applications.filter(
     (app) => app.status === "OFFER",
   ).length;
+
+  function handleUpdateApplication(
+    id: string,
+    update: (current: Application) => Application,
+  ) {
+    setApplications((previous) =>
+      previous.map((app) => (app.id === id ? update(app) : app)),
+    );
+  }
 
   // ---------- Handler Fitur 1 ----------
   function handleAddSkill(skill: string) {
@@ -109,6 +119,7 @@ function App() {
     if (index === -1) return;
 
     const target = applications[index];
+    if (selectedId === id) setSelectedId(null);
     setApplications((prev) => prev.filter((app) => app.id !== id));
     setPendingDelete({ app: target, index });
   }
@@ -130,7 +141,10 @@ function App() {
     <>
       <Navbar
         activeTab={activeTab}
-        onChangeTab={setActiveTab}
+        onChangeTab={(tab) => {
+          setActiveTab(tab);
+          setSelectedId(null);
+        }}
         onOpenForm={() => setIsFormOpen((open) => !open)}
         pipelineCount={applications.length}
         offerCount={offerCount}
@@ -138,7 +152,7 @@ function App() {
 
       <main className="container">
         <ConflictBanner applications={applications} />
-        <StatsCards />
+        <StatsCards applications={applications} />
 
         {isFormOpen && (
           <ApplicationForm
@@ -174,13 +188,25 @@ function App() {
               kaptenSkills={kaptenSkills}
               onSimulateGhosting={handleSimulateGhosting}
               onDelete={handleDeleteApplication}
+              onOpenDetail={setSelectedId}
             />
-            <ApplicationDetail />
-            <InterviewTimer />
+            {selectedApplication && (
+              <ApplicationDetail
+                key={selectedApplication.id}
+                application={selectedApplication}
+                onUpdate={handleUpdateApplication}
+                onClose={() => setSelectedId(null)}
+              />
+            )}
           </>
         )}
 
-        {activeTab === "offer" && <OfferComparator />}
+        {activeTab === "offer" && (
+          <OfferComparator
+            applications={applications}
+            kaptenSkills={kaptenSkills}
+          />
+        )}
       </main>
 
       {pendingDelete && (

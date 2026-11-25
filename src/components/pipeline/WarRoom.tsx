@@ -20,6 +20,7 @@ interface WarRoomProps {
   kaptenSkills: string[];
   onSimulateGhosting: (id: string) => void;
   onDelete: (id: string) => void;
+  onOpenDetail: (id: string) => void;
 }
 
 function getStatusBadgeClass(status: ApplicationStatus): string {
@@ -33,6 +34,7 @@ function WarRoom({
   kaptenSkills,
   onSimulateGhosting,
   onDelete,
+  onOpenDetail,
 }: WarRoomProps) {
   const [keyword, setKeyword] = useState("");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("ALL");
@@ -46,8 +48,7 @@ function WarRoom({
     const search = debouncedKeyword.trim().toLowerCase();
 
     const filtered = applications.filter((app) => {
-      const matchStatus =
-        statusFilter === "ALL" || app.status === statusFilter;
+      const matchStatus = statusFilter === "ALL" || app.status === statusFilter;
       const matchGhosting = !onlyGhosting || isRawanGhosting(app);
       const matchSearch =
         search === "" ||
@@ -168,7 +169,9 @@ function WarRoom({
               const ghosting = isRawanGhosting(app);
               const canSimulate =
                 app.status === "APPLIED" || app.status === "SCREENING";
-              const doneCount = app.checklist.filter((item) => item.done).length;
+              const doneCount = app.checklist.filter(
+                (item) => item.done,
+              ).length;
               const match = calculateSkillMatch(
                 kaptenSkills,
                 app.requiredSkills,
@@ -212,6 +215,14 @@ function WarRoom({
                       >
                         {match.score}% Match
                       </span>
+
+                      <button
+                        type="button"
+                        className="btn btn--primary"
+                        onClick={() => onOpenDetail(app.id)}
+                      >
+                        Detail
+                      </button>
 
                       {canSimulate && (
                         <button
