@@ -1,9 +1,3 @@
-// =====================================================================
-// src/utils/offerScore.ts  —  PJ: Rifki
-// Total = (Normalisasi Gaji x 50%) + (Skor Mode Kerja x 25%) + (Skill Match % x 25%)
-// Skor Mode: Remote 100, Hybrid 75, Onsite 50.
-// Normalisasi gaji (sesuai wireframe): gaji / gajiTertinggi * 100
-// =====================================================================
 import type { Application, WorkMode } from "../types";
 
 export const WORK_MODE_SCORE: Record<WorkMode, number> = {
@@ -13,17 +7,35 @@ export const WORK_MODE_SCORE: Record<WorkMode, number> = {
 };
 
 export interface OfferScore {
-  salaryPoints: number; // max 50
-  modePoints: number; // max 25
-  skillPoints: number; // max 25
-  total: number; // max 100
+  salaryPoints: number;
+  modePoints: number;
+  skillPoints: number;
+  total: number;
 }
 
+// Bobot: gaji 50%, mode kerja 25%, skill match 25%.
+// maxSalary adalah gaji tertinggi dari dua offer yang dibandingkan.
 export function calculateOfferScore(
-  _offer: Application,
-  _maxSalary: number,
-  _skillMatchPercent: number,
+  offer: Application,
+  maxSalary: number,
+  skillMatchPercent: number,
 ): OfferScore {
-  // TODO (Rifki)
-  return { salaryPoints: 0, modePoints: 0, skillPoints: 0, total: 0 };
+  const salary = Math.max(0, offer.salaryOffer ?? 0);
+
+  const salaryPoints =
+    maxSalary > 0
+      ? Math.min(salary / maxSalary, 1) * 50
+      : 0;
+
+  const modePoints = WORK_MODE_SCORE[offer.workMode] * 0.25;
+
+  const skillPoints =
+    Math.min(100, Math.max(0, skillMatchPercent)) * 0.25;
+
+  return {
+    salaryPoints,
+    modePoints,
+    skillPoints,
+    total: salaryPoints + modePoints + skillPoints,
+  };
 }

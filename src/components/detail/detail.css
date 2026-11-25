@@ -1,0 +1,99 @@
+.detail-heading,
+.detail-actions,
+.detail-inline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.detail-heading {
+  justify-content: space-between;
+}
+.detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 28px;
+  margin-top: 24px;
+}
+.detail-grid > div {
+  min-width: 0;
+}
+.detail-form {
+  display: grid;
+  gap: 12px;
+  margin: 16px 0;
+}
+.detail-form label {
+  display: grid;
+  gap: 6px;
+}
+.detail-form button {
+  justify-self: start;
+}
+.detail-inline .input {
+  flex: 1;
+  min-width: 160px;
+}
+.detail-checklist {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.detail-checklist li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid var(--garis);
+  border-radius: 8px;
+}
+.detail-checklist label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  overflow-wrap: anywhere;
+}
+.checklist-done {
+  text-decoration: line-through;
+  color: var(--abu);
+}
+.checklist-progress {
+  width: 100%;
+  height: 10px;
+  accent-color: var(--hijau);
+}
+.activity-list {
+  padding-left: 22px;
+  max-height: 420px;
+  overflow: auto;
+}
+.activity-list li {
+  margin: 14px 0;
+  overflow-wrap: anywhere;
+}
+.activity-list p {
+  margin: 2px 0;
+  white-space: pre-wrap;
+}
+.prep-timer {
+  background: #f4f6ef;
+  padding: 18px;
+  border-radius: 12px;
+  margin-top: 16px;
+}
+.timer-clock {
+  display: block;
+  font-size: 2.8rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.detail-actions {
+  margin-top: 12px;
+}
+@media (max-width: 800px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
