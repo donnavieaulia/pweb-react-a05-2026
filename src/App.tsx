@@ -10,6 +10,7 @@ import {
   createApplication,
   detectWorkMode,
   isDuplicateApplication,
+  sanitizeApplications,
 } from "./utils/application";
 import Navbar from "./components/layout/Navbar";
 import SkillProfile from "./components/explore/SkillProfile";
@@ -25,15 +26,22 @@ import OfferComparator from "./components/dashboard/OfferComparator";
 const DEFAULT_SKILLS = ["React", "TypeScript", "CSS"];
 const FIFTEEN_DAYS_MS = 15 * 24 * 60 * 60 * 1000;
 
+function sanitizeSkills(raw: unknown): string[] {
+  if (!Array.isArray(raw)) return DEFAULT_SKILLS;
+  return raw.filter((item): item is string => typeof item === "string");
+}
+
 function App() {
   // ---------- State utama (persisten di localStorage) ----------
   const [kaptenSkills, setKaptenSkills] = useLocalStorage<string[]>(
     "kaptenSkills",
     DEFAULT_SKILLS,
+    sanitizeSkills,
   );
   const [applications, setApplications] = useLocalStorage<Application[]>(
     "applications",
     [],
+    sanitizeApplications,
   );
 
   // ---------- State tampilan ----------

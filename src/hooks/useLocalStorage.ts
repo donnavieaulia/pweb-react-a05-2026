@@ -6,11 +6,16 @@
 import { useEffect, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 
-function readFromStorage<T>(key: string, initialValue: T): T {
+function readFromStorage<T>(
+  key: string,
+  initialValue: T,
+  sanitize?: (raw: unknown) => T,
+): T {
   try {
     const raw = window.localStorage.getItem(key);
     if (raw === null) return initialValue;
-    return JSON.parse(raw) as T;
+    const parsed: unknown = JSON.parse(raw);
+    return sanitize ? sanitize(parsed) : (parsed as T);
   } catch {
     return initialValue;
   }
@@ -19,9 +24,10 @@ function readFromStorage<T>(key: string, initialValue: T): T {
 export function useLocalStorage<T>(
   key: string,
   initialValue: T,
+  sanitize?: (raw: unknown) => T,
 ): [T, Dispatch<SetStateAction<T>>] {
   const [value, setValue] = useState<T>(() =>
-    readFromStorage(key, initialValue),
+    readFromStorage(key, initialValue, sanitize),
   );
 
   useEffect(() => {
